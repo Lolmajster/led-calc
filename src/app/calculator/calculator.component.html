@@ -1,0 +1,14 @@
+<form [formGroup]="calcForm" (ngSubmit)="submitForm()" novalidate class="calculator-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Lampa 1</mat-label>
+    <input matInput placeholder="0" type="number" formControlName="lamp1">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Lampa 2</mat-label>
+    <input matInput placeholder="0" type="number" formControlName="lamp2">
+  </mat-form-field>
+
+  <button mat-flat-button color="primary">Submit</button>
+
+</form>
