@@ -1,0 +1,34 @@
+{
+  "controls": [
+    {
+      "name": "lamp50w",
+      "label": "Lampa 50W",
+      "value": "",
+      "type": "text",
+      "price": 50,
+      "wat": 50,
+      "validators": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+    {
+      "name": "lamp100",
+      "label": "Lampa 100W",
+      "value": "",
+      "type": "text",
+      "price": 100,
+      "wat": 100,
+      "validators": {}
+    },
+    {
+      "name": "lamp120",
+      "label": "Lampa 120W",
+      "value": "",
+      "type": "text",
+      "price": 120,
+      "wat": 120,
+      "validators": {}
+    }
+  ]
+}

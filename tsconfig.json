@@ -22,7 +22,10 @@
     "strictPropertyInitialization": false,
     "lib": [
       "ES2022",
-      "dom"
+      "es5",
+      "es6",
+      "dom",
+      "dom.iterable"
     ]
   },
   "angularCompilerOptions": {
