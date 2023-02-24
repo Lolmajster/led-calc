@@ -1,7 +1,8 @@
 import { Component, OnChanges, SimpleChanges, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { JsonFormData, Control } from 'src/app/interfaces/my-form.interface';
+import { DataService } from '../services/data.service';
+import { Control } from 'src/app/interfaces/my-form.interface';
 
 @Component({
   selector: 'app-calculator',
@@ -10,14 +11,15 @@ import { JsonFormData, Control } from 'src/app/interfaces/my-form.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalculatorComponent implements OnChanges {
-  @Input() jsonFormData: JsonFormData;
+  @Input() controls: Control[];
   calcForm: FormGroup = this.fb.group({});
 
-  constructor(public fb: FormBuilder) {}
+  constructor(public fb: FormBuilder, private dataService: DataService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(!changes['jsonFormData'].firstChange) {
-      this.createForm(this.jsonFormData.controls)
+    if(!changes['controls'].firstChange) {
+      console.log(changes);
+      this.createForm(this.controls);
     }
   }
 
@@ -74,27 +76,24 @@ export class CalculatorComponent implements OnChanges {
 
   submitForm() {
     console.log('calcForm.valueChanges: ', this.calcForm.value);
-    console.log('this.jsonFormData', this.jsonFormData);
+    console.log('this.controls', this.controls);
 
-    const sum = this.jsonFormData.controls
-      .map((obj: Control) => obj.price)
-      .reduce((accumulator: any, current: any) => accumulator + current, 0);
+    // const sum = this.jsonFormData.controls
+    //   .map((obj: Control) => obj.price)
+    //   .reduce((accumulator: any, current: any) => accumulator + current, 0);
+    // console.log(sum);
 
-    console.log(sum);
-
-
-    for (const key in this.calcForm.value) {
-      if (this.calcForm.value.hasOwnProperty(key)) {
-        // console.log(`${key}: ${this.calcForm.value[key]}`);
-
-        if (this.calcForm.value[key] > 0) {
-          console.log(this.calcForm.value[key]);
-          let el = this.jsonFormData.controls.find(ele => ele.name == key);
-          console.log(el);
-        }
-      }
+    //* update controls$ global object by values from calcForm
+    for (let key in this.calcForm.value) {
+      this.dataService.controls$.subscribe(el => {
+        const index = el.findIndex(ele => ele.name === key)
+        el[index].qty = +this.calcForm.value[key];
+      });
     }
 
-    console.log(this.jsonFormData);
+    this.dataService.calculateLampPrice();
+
   }
+
+
 }

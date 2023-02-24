@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './services/data.service'
 
-import { JsonFormData } from 'src/app/interfaces/my-form.interface';
+import { DataService } from './services/data.service'
+import { Control } from 'src/app/interfaces/my-form.interface';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +10,16 @@ import { JsonFormData } from 'src/app/interfaces/my-form.interface';
 })
 export class AppComponent  implements OnInit {
   title = 'Kalkulator modernizacji oświetlenia';
-  public formData: JsonFormData;
+  public formData: Control[];
+  totalCost: number;
 
-  constructor(private _http: HttpClient, private dataService: DataService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getControls().subscribe((formData: JsonFormData) => {this.formData = formData})
+    this.dataService.getControls();
+    this.dataService.controls$.subscribe((controls: Control[]) => {
+      this.formData = controls;
+    });
+    this.dataService.totalCost$.subscribe(totalCost => this.totalCost = totalCost)
   }
 }
