@@ -3,20 +3,16 @@ export interface Control {
   label: string
   value: string
   type: string
+  price: number
+  wat: number
+  qty: number
+  totalCost: number
   validators: Validators
-  options?: Options
 }
 
 export interface Validators {
   required?: boolean
   minLength?: number
-}
-
-export interface Options {
-  min: string
-  max: string
-  step: string
-  icon: string
 }
 
 export interface JsonFormData {

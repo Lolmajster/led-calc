@@ -11,20 +11,17 @@ import { JsonFormData, Control } from 'src/app/interfaces/my-form.interface';
 })
 export class CalculatorComponent implements OnChanges {
   @Input() jsonFormData: JsonFormData;
-
   calcForm: FormGroup = this.fb.group({});
 
   constructor(public fb: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if(!changes['jsonFormData'].firstChange) {
-      console.log(this.jsonFormData.controls);
       this.createForm(this.jsonFormData.controls)
     }
   }
 
   createForm(controls: Control[]) {
-    console.log(controls);
     for (const control of controls) {
       const validatorsToAdd = [];
       for (const [key, value] of Object.entries(control.validators)) {
@@ -69,8 +66,6 @@ export class CalculatorComponent implements OnChanges {
         }
       }
 
-
-
       this.calcForm.addControl(
         control.name,
         this.fb.control(control.value, validatorsToAdd))
@@ -78,9 +73,28 @@ export class CalculatorComponent implements OnChanges {
   }
 
   submitForm() {
-    console.log('calcForm: ', this.calcForm);
-    console.log('calcForm.value: ', this.calcForm.value);
-    console.log('calcForm.valid', this.calcForm.valid);
+    console.log('calcForm.valueChanges: ', this.calcForm.value);
     console.log('this.jsonFormData', this.jsonFormData);
+
+    const sum = this.jsonFormData.controls
+      .map((obj: Control) => obj.price)
+      .reduce((accumulator: any, current: any) => accumulator + current, 0);
+
+    console.log(sum);
+
+
+    for (const key in this.calcForm.value) {
+      if (this.calcForm.value.hasOwnProperty(key)) {
+        // console.log(`${key}: ${this.calcForm.value[key]}`);
+
+        if (this.calcForm.value[key] > 0) {
+          console.log(this.calcForm.value[key]);
+          let el = this.jsonFormData.controls.find(ele => ele.name == key);
+          console.log(el);
+        }
+      }
+    }
+
+    console.log(this.jsonFormData);
   }
 }
