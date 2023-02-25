@@ -1,3 +1,5 @@
 <app-header [title]="title"></app-header>
-<app-calculator [jsonFormData]="formData"></app-calculator>
+<app-calculator [controls]="formData"></app-calculator>
+{{ formData | json }}
+<p>TOTAL COST: {{ totalCost }}</p>
 <app-footer></app-footer>

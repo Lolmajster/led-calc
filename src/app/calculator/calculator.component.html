@@ -1,8 +1,10 @@
 <form class="calculator-form" [formGroup]="calcForm" (ngSubmit)="submitForm()">
-  <mat-form-field class="example-full-width" *ngFor="let control of jsonFormData?.controls">
+  <mat-form-field class="example-full-width" *ngFor="let control of controls">
     <mat-label>{{ control.label }}</mat-label>
     <input matInput placeholder="0" [type]="control.type" [formControlName]="control.name" [value]="control.value">
   </mat-form-field>
 
-  <button mat-flat-button color="primary">Submit</button>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!calcForm.valid">Submit</button>
 </form>
+
+

@@ -1,12 +1,12 @@
 {
   "controls": [
     {
-      "name": "lamp50w",
-      "label": "Lampa 50W",
+      "name": "lamp18w",
+      "label": "Lampa 18W",
       "value": "0",
       "type": "number",
       "price": 50,
-      "wat": 50,
+      "wat": 18,
       "qty": 0,
       "totalCost": 0,
       "validators": {
@@ -15,23 +15,48 @@
       }
     },
     {
-      "name": "lamp100",
-      "label": "Lampa 100W",
-      "value": "",
+      "name": "lamp36w",
+      "label": "Lampa 36W",
+      "value": "0",
       "type": "number",
       "price": 100,
-      "wat": 100,
+      "wat": 36,
+      "qty": 0,
+      "totalCost": 0,
+      "validators": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "lamp40",
+      "label": "Lampa 40W",
+      "value": "0",
+      "type": "number",
+      "price": 120,
+      "wat": 40,
       "qty": 0,
       "totalCost": 0,
       "validators": {}
     },
     {
-      "name": "lamp120",
-      "label": "Lampa 120W",
-      "value": "",
+      "name": "lamp80",
+      "label": "Lampa 80W",
+      "value": "0",
+      "type": "number",
+      "price": 180,
+      "wat": 80,
+      "qty": 0,
+      "totalCost": 0,
+      "validators": {}
+    },
+    {
+      "name": "lamp100",
+      "label": "Lampa 100W",
+      "value": "0",
       "type": "number",
       "price": 120,
-      "wat": 120,
+      "wat": 220,
       "qty": 0,
       "totalCost": 0,
       "validators": {}
