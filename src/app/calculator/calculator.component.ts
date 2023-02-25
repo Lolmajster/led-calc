@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { DataService } from '../services/data.service';
@@ -10,11 +10,16 @@ import { Control } from 'src/app/interfaces/my-form.interface';
   styleUrls: ['./calculator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalculatorComponent implements OnChanges {
+export class CalculatorComponent implements OnInit, OnChanges {
   @Input() controls: Control[];
   calcForm: FormGroup = this.fb.group({});
 
   constructor(public fb: FormBuilder, private dataService: DataService) {}
+
+  ngOnInit(): void {
+    // this.calcForm.addControl('days', new FormControl('0', Validators.required));
+    this.calcForm.addControl('days', this.fb.control('0', Validators.required));
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(!changes['controls'].firstChange) {
