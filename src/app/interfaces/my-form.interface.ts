@@ -16,5 +16,5 @@ export interface Validators {
 }
 
 export interface JsonFormData {
-  controls: Control[]
+  lamps: Control[]
 }
