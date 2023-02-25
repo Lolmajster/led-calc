@@ -46,7 +46,7 @@ export class CalculatorComponent implements OnChanges {
             break;
           case 'email':
             if (value) {
-              validatorsToAdd.push(Validators.requiredTrue);
+              validatorsToAdd.push(Validators.email);
             }
             break;
           case 'minLength':
@@ -75,6 +75,7 @@ export class CalculatorComponent implements OnChanges {
   }
 
   submitForm() {
+    console.log('calcForm: ', this.calcForm);
     console.log('calcForm.valueChanges: ', this.calcForm.value);
     console.log('this.controls', this.controls);
 

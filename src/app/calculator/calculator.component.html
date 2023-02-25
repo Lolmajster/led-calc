@@ -4,7 +4,7 @@
     <input matInput placeholder="0" [type]="control.type" [formControlName]="control.name" [value]="control.value">
   </mat-form-field>
 
-  <button mat-flat-button color="primary">Submit</button>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!calcForm.valid">Submit</button>
 </form>
 
 
