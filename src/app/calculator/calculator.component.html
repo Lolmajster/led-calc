@@ -1,12 +1,9 @@
-<form  class="calculator-form" [formGroup]="calcForm" (ngSubmit)="submitForm()">
-  <mat-form-field>
-    <mat-label></mat-label>
-    <input matInput placeholder="0" type="number" formControlName="days" value="">
-  </mat-form-field>
-  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1rem">
+<form [formGroup]="calcForm" (ngSubmit)="submitForm()">
+  <app-parameters></app-parameters>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
     <mat-form-field *ngFor="let control of controls">
       <mat-label>{{ control.label }}</mat-label>
-      <input matInput placeholder="0" [type]="control.type" [formControlName]="control.name" [value]="control.value">
+      <input matInput placeholder="0" [type]="control.type" [formControlName]="control.name">
     </mat-form-field>
   </div>
   <button mat-flat-button color="primary" type="submit" [disabled]="!calcForm.valid">Submit</button>

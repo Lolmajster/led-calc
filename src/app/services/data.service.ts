@@ -18,14 +18,14 @@ export class DataService {
 
   getControls() {
     this._http.get<JsonFormData>('/assets/my-form.json').subscribe((response) => {
-      this.controlsSubject.next(response.controls);
+      this.controlsSubject.next(response.lamps);
     })
   }
 
   calculateLampPrice() {
     this.controls$.subscribe((controls: Control[]) => {
       for(let ele of controls) {
-        console.log(ele.qty)
+        console.log(ele)
         ele.totalCost = ele.price * ele.qty;
       }
     });

@@ -16,14 +16,10 @@ export class CalculatorComponent implements OnInit, OnChanges {
 
   constructor(public fb: FormBuilder, private dataService: DataService) {}
 
-  ngOnInit(): void {
-    // this.calcForm.addControl('days', new FormControl('0', Validators.required));
-    this.calcForm.addControl('days', this.fb.control('0', Validators.required));
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if(!changes['controls'].firstChange) {
-      console.log(changes);
       this.createForm(this.controls);
     }
   }
@@ -81,7 +77,8 @@ export class CalculatorComponent implements OnInit, OnChanges {
 
   submitForm() {
     console.log('calcForm: ', this.calcForm);
-    console.log('calcForm.valueChanges: ', this.calcForm.value);
+    console.log('calcForm.controls: ', this.calcForm.controls);
+    console.log('calcForm.values: ', this.calcForm.value);
     console.log('this.controls', this.controls);
 
     // const sum = this.jsonFormData.controls
@@ -91,10 +88,13 @@ export class CalculatorComponent implements OnInit, OnChanges {
 
     //* update controls$ global object by values from calcForm
     for (let key in this.calcForm.value) {
-      this.dataService.controls$.subscribe(el => {
-        const index = el.findIndex(ele => ele.name === key)
-        el[index].qty = +this.calcForm.value[key];
-      });
+      if (key !== 'parameters') {
+        this.dataService.controls$.subscribe(el => {
+          const index = el.findIndex(ele => ele.name === key)
+          // el[index].qty = this.calcForm.value['lamps'].controls[key];
+          el[index].qty = +this.calcForm.value[key];
+        });
+      }
     }
 
     this.dataService.calculateLampPrice();

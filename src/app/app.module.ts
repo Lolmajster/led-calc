@@ -12,6 +12,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
+import { ParametersComponent } from './calculator/parameters/parameters.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MatInputModule } from "@angular/material/input";
     AppComponent,
     AppHeaderComponent,
     AppFooterComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ParametersComponent
   ],
   imports: [
     BrowserModule,
